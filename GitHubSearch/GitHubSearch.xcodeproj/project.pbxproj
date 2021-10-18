@@ -68,7 +68,6 @@
 		5C7439F427181465006DFBCE /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				5C7439F027180567006DFBCE /* GFAlertVC.swift */,
 				5CDDB3EA2702E7F90015B4BF /* SearchVC.swift */,
 				5CDDB3EC2702E8200015B4BF /* FavoriteListVC.swift */,
 				5C19D3D92716B46900D85070 /* FollowerListVC.swift */,
@@ -201,6 +200,7 @@
 		5CDDE448271D5C1300D73579 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
+				5C7439F027180567006DFBCE /* GFAlertVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
