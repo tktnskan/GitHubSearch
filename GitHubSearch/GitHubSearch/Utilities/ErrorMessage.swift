@@ -8,8 +8,8 @@
 import Foundation
 
 enum GFError: String, Error {
-    case invalidUsername = "This username created an invalid request. Please try again."
-    case unableToComplete = "Unable to complete your request. Please check your internet connection"
-    case invalidResponse = "Invalid response from the server. Please try again"
-    case invalidData = "The data received from the server was Invalid. Please try again"
+    case invalidUsername = "일치하는 회원이 없습니다. 아이디를 확인해주세요."
+    case unableToComplete = "인터넷 통신상태를 확인해주세요."
+    case invalidResponse = "잠시후 다시 시도해주세요."
+    case invalidData = "유저정보가 명확하지 않습니다. 다시 시도해주세요."
 }
