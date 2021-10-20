@@ -136,8 +136,9 @@ extension FollowerListVC: UICollectionViewDelegate {
         let activeFollower = isSearching ? filteredFollowers[indexPath.item] : followers[indexPath.item]
         
         let nextVC = UserInfoVC()
-//        nextVC.userInfo = activeFollower
-        present(nextVC, animated: true)
+        nextVC.userInfo = activeFollower
+        let navi = UINavigationController(rootViewController: nextVC)
+        present(navi, animated: true)
         
     }
 }
