@@ -9,7 +9,7 @@ import UIKit
 
 class UserInfoVC: UIViewController {
     
-    let userInfo: Follower?
+//    let userInfo: Follower?
     
     override func viewDidLoad() {
         super.viewDidLoad()
