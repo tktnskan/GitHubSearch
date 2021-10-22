@@ -8,8 +8,8 @@
 import UIKit
 
 protocol UserInfoVCDelegate: AnyObject {
-    func didTapGiHubProfile()
-    func didTapGetFollowers()
+    func didTapGiHubProfile(for user: User)
+    func didTapGetFollowers(for user: User)
 }
 
 class UserInfoVC: UIViewController {
@@ -21,7 +21,8 @@ class UserInfoVC: UIViewController {
     var itemViews: [UIView] = []
     
     var username: String!
-
+    weak var delegate: FollowerListVCDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -110,11 +111,20 @@ class UserInfoVC: UIViewController {
 }
 
 extension UserInfoVC: UserInfoVCDelegate {
-    func didTapGiHubProfile() {
-        
+    func didTapGiHubProfile(for user: User) {
+        guard let url = URL(string: user.htmlUrl) else {
+            presentGFAlertOnMainThread(title: "주소 오류", message: "유저 주소가 정확하지 않습니다.", buttonTitle: "Ok")
+            return
+        }
+        presentSafariVC(with: url)
     }
     
-    func didTapGetFollowers() {
-        
+    func didTapGetFollowers(for user: User) {
+        guard user.followers != 0 else {
+            presentGFAlertOnMainThread(title: "팔로워 없음", message: "\(user.login) 유저는 팔로워가 없네요 😅", buttonTitle: "Ok")
+            return
+        }
+        delegate.didRequestFollowers(for: user.login)
+        dismiss(animated: true)
     }
 }

@@ -37,6 +37,7 @@
 		5CE3DC08271D06A500480BC3 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE3DC07271D06A500480BC3 /* ErrorMessage.swift */; };
 		5CE3DC0B271D0F1C00480BC3 /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE3DC0A271D0F1C00480BC3 /* FollowerCell.swift */; };
 		5CE3DC0D271D0F9500480BC3 /* GFAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE3DC0C271D0F9500480BC3 /* GFAvatarImageView.swift */; };
+		5CF5C0CE2722836800E399FF /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF5C0CD2722836800E399FF /* PersistenceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		5CE3DC07271D06A500480BC3 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		5CE3DC0A271D0F1C00480BC3 /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		5CE3DC0C271D0F9500480BC3 /* GFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAvatarImageView.swift; sourceTree = "<group>"; };
+		5CF5C0CD2722836800E399FF /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				5CBFFB2D271966A2002A5C02 /* NetworkManager.swift */,
+				5CF5C0CD2722836800E399FF /* PersistenceManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				5CBFFB292719420B002A5C02 /* Follower.swift in Sources */,
 				5C7246CB27211F4300D03959 /* GFItemInfoVC.swift in Sources */,
 				5CABE84B271E58B300C678B0 /* UserInfoVC.swift in Sources */,
+				5CF5C0CE2722836800E399FF /* PersistenceManager.swift in Sources */,
 				5C7246CF27211F6E00D03959 /* GFFollowerItemVC.swift in Sources */,
 				5C7439ED2718021C006DFBCE /* GFTitleLabel.swift in Sources */,
 				5CBFFB2E271966A2002A5C02 /* NetworkManager.swift in Sources */,

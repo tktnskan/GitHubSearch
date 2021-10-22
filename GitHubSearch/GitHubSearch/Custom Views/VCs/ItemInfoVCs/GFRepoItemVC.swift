@@ -21,6 +21,6 @@ class GFRepoItemVC: GFItemInfoVC {
     }
     
     override func actionButtonTapped() {
-        delegate.didTapGiHubProfile()
+        delegate.didTapGiHubProfile(for: user)
     }
 }
