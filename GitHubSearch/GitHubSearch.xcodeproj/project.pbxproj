@@ -38,6 +38,7 @@
 		5CE3DC0B271D0F1C00480BC3 /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE3DC0A271D0F1C00480BC3 /* FollowerCell.swift */; };
 		5CE3DC0D271D0F9500480BC3 /* GFAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE3DC0C271D0F9500480BC3 /* GFAvatarImageView.swift */; };
 		5CF5C0CE2722836800E399FF /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF5C0CD2722836800E399FF /* PersistenceManager.swift */; };
+		5CF5C0D027229DA300E399FF /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF5C0CF27229DA300E399FF /* FavoriteCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		5CE3DC0A271D0F1C00480BC3 /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		5CE3DC0C271D0F9500480BC3 /* GFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAvatarImageView.swift; sourceTree = "<group>"; };
 		5CF5C0CD2722836800E399FF /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		5CF5C0CF27229DA300E399FF /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				5CE3DC0A271D0F1C00480BC3 /* FollowerCell.swift */,
+				5CF5C0CF27229DA300E399FF /* FavoriteCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				5C7439ED2718021C006DFBCE /* GFTitleLabel.swift in Sources */,
 				5CBFFB2E271966A2002A5C02 /* NetworkManager.swift in Sources */,
 				5CDDB3D72702DF560015B4BF /* AppDelegate.swift in Sources */,
+				5CF5C0D027229DA300E399FF /* FavoriteCell.swift in Sources */,
 				5CDDB3D92702DF560015B4BF /* SceneDelegate.swift in Sources */,
 				5C19D3DA2716B46900D85070 /* FollowerListVC.swift in Sources */,
 			);

@@ -50,7 +50,24 @@ class FollowerListVC: UIViewController {
     }
     
     @objc func addButtonTapped() {
-        
+        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let user):
+                let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
+                PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
+                    guard let self = self else { return }
+                    guard let error = error else {
+                        self.presentGFAlertOnMainThread(title: "성공", message: "\(user.login) 님이 Favorite에 추가되었습니다.", buttonTitle: "Ok")
+                        return
+                    }
+                    self.presentGFAlertOnMainThread(title: "실패", message: error.rawValue, buttonTitle: "Ok")
+                }
+            case .failure(let error):
+                self.presentGFAlertOnMainThread(title: "오류", message: error.rawValue, buttonTitle: "Ok")
+            }
+        }
     }
     
     func configureCollectionView() {
