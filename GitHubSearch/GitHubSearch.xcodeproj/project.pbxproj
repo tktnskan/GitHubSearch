@@ -27,6 +27,7 @@
 		5CBFFB292719420B002A5C02 /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBFFB282719420B002A5C02 /* Follower.swift */; };
 		5CBFFB2B2719431C002A5C02 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBFFB2A2719431C002A5C02 /* User.swift */; };
 		5CBFFB2E271966A2002A5C02 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CBFFB2D271966A2002A5C02 /* NetworkManager.swift */; };
+		5CD779682726918E000AE679 /* GFTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD779672726918E000AE679 /* GFTabBarController.swift */; };
 		5CDDB3D72702DF560015B4BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDDB3D62702DF560015B4BF /* AppDelegate.swift */; };
 		5CDDB3D92702DF560015B4BF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CDDB3D82702DF560015B4BF /* SceneDelegate.swift */; };
 		5CDDB3E02702DF570015B4BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CDDB3DF2702DF570015B4BF /* Assets.xcassets */; };
@@ -62,6 +63,7 @@
 		5CBFFB282719420B002A5C02 /* Follower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follower.swift; sourceTree = "<group>"; };
 		5CBFFB2A2719431C002A5C02 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5CBFFB2D271966A2002A5C02 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		5CD779672726918E000AE679 /* GFTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFTabBarController.swift; sourceTree = "<group>"; };
 		5CDDB3D32702DF560015B4BF /* GitHubSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CDDB3D62702DF560015B4BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5CDDB3D82702DF560015B4BF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 		5C7439F52718149D006DFBCE /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				5CD7796627269175000AE679 /* TabBarControllers */,
 				5CDDE448271D5C1300D73579 /* VCs */,
 				5CDDE447271D5BE800D73579 /* Labels */,
 				5CDDE446271D5BDC00D73579 /* ImageViews */,
@@ -161,6 +164,14 @@
 				5CF5C0CD2722836800E399FF /* PersistenceManager.swift */,
 			);
 			path = Manager;
+			sourceTree = "<group>";
+		};
+		5CD7796627269175000AE679 /* TabBarControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5CD779672726918E000AE679 /* GFTabBarController.swift */,
+			);
+			path = TabBarControllers;
 			sourceTree = "<group>";
 		};
 		5CDDB3CA2702DF560015B4BF = {
@@ -338,6 +349,7 @@
 				5C7246D4272124A400D03959 /* Date+ext.swift in Sources */,
 				5C7246CD27211F5700D03959 /* GFRepoItemVC.swift in Sources */,
 				5CBFFB2B2719431C002A5C02 /* User.swift in Sources */,
+				5CD779682726918E000AE679 /* GFTabBarController.swift in Sources */,
 				5CA1ED6F271FFB800027F468 /* Constants.swift in Sources */,
 				5C19D3D8271696BE00D85070 /* GFTextField.swift in Sources */,
 				5C7439F327180B20006DFBCE /* UIViewController+Ext.swift in Sources */,
