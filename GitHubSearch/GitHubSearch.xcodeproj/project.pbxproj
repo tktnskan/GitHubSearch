@@ -42,6 +42,7 @@
 		5CE3DC0D271D0F9500480BC3 /* GFAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE3DC0C271D0F9500480BC3 /* GFAvatarImageView.swift */; };
 		5CF5C0CE2722836800E399FF /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF5C0CD2722836800E399FF /* PersistenceManager.swift */; };
 		5CF5C0D027229DA300E399FF /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF5C0CF27229DA300E399FF /* FavoriteCell.swift */; };
+		D19A827F27298264005BFE7E /* UIView+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19A827E27298264005BFE7E /* UIView+ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		5CE3DC0C271D0F9500480BC3 /* GFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAvatarImageView.swift; sourceTree = "<group>"; };
 		5CF5C0CD2722836800E399FF /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		5CF5C0CF27229DA300E399FF /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
+		D19A827E27298264005BFE7E /* UIView+ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 				5C7439F227180B20006DFBCE /* UIViewController+Ext.swift */,
 				5C7246D3272124A400D03959 /* Date+ext.swift */,
 				5C7246D5272124E100D03959 /* String+ext.swift */,
+				D19A827E27298264005BFE7E /* UIView+ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -362,6 +365,7 @@
 				5CDDB3ED2702E8200015B4BF /* FavoriteListVC.swift in Sources */,
 				5C19D3D6271693E600D85070 /* GFButton.swift in Sources */,
 				5CA1ED6B271FF4550027F468 /* GFUserInfoHeaderVC.swift in Sources */,
+				D19A827F27298264005BFE7E /* UIView+ext.swift in Sources */,
 				5C7246D127211FBF00D03959 /* GFItemInfoView.swift in Sources */,
 				5CE3DC0D271D0F9500480BC3 /* GFAvatarImageView.swift in Sources */,
 				5CA1ED6D271FF4BE0027F468 /* GFSecondaryTitleLabel.swift in Sources */,

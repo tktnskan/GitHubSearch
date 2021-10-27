@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol FollowerListVCDelegate: AnyObject {
-    func didRequestFollowers(for username: String)
-}
-
 class FollowerListVC: GFDataLoadingVC {
 
     enum Section {
@@ -23,6 +19,7 @@ class FollowerListVC: GFDataLoadingVC {
     var filteredFollowers:[Follower] = []
     var hasMoreFollowers: Bool = true
     var isSearching: Bool = false
+    var isLoadingMoreFollower: Bool = false
     
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section,Follower>!
@@ -60,6 +57,7 @@ class FollowerListVC: GFDataLoadingVC {
     }
     
     @objc func addButtonTapped() {
+        isLoadingMoreFollower = true
         NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
             guard let self = self else { return }
             
@@ -77,6 +75,7 @@ class FollowerListVC: GFDataLoadingVC {
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "오류", message: error.rawValue, buttonTitle: "Ok")
             }
+            self.isLoadingMoreFollower = false
         }
     }
     
@@ -105,7 +104,6 @@ class FollowerListVC: GFDataLoadingVC {
     func configureSearchController() {
         let searchController = UISearchController()
         searchController.searchResultsUpdater = self
-        searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "유저 아이디를 입력해주세요."
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -125,7 +123,7 @@ class FollowerListVC: GFDataLoadingVC {
                 self.followers.append(contentsOf: followers)
                 
                 if self.followers.isEmpty {
-                    let message = "팔로잉 중이 유저가 없네요..."
+                    let message = "팔로잉 중인 유저가 없네요..."
                     DispatchQueue.main.async {
                         self.showEmptyStateView(with: message, in: self.view)
                     }
@@ -164,7 +162,7 @@ extension FollowerListVC: UICollectionViewDelegate {
         let height = scrollView.frame.size.height
         
         if offSetY > contentHeight - height {
-            guard hasMoreFollowers else { return }
+            guard !isLoadingMoreFollower, hasMoreFollowers else { return }
             page += 1
             getFollowers(page: page)
         }
@@ -182,31 +180,27 @@ extension FollowerListVC: UICollectionViewDelegate {
     }
 }
 
-extension FollowerListVC: UISearchResultsUpdating, UISearchBarDelegate {
+extension FollowerListVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let filter = searchController.searchBar.text, !filter.isEmpty else {
             updateData(on: followers)
+            isSearching = false
             return
         }
         isSearching = true
         filteredFollowers = followers.filter { $0.login.lowercased().contains(filter.lowercased()) }
         updateData(on: filteredFollowers)
     }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        isSearching = false
-        updateData(on: followers)
-    }
 }
 
-extension FollowerListVC: FollowerListVCDelegate {
+extension FollowerListVC: UserInfoVCDelegate {
     func didRequestFollowers(for username: String) {
         self.username = username
         title = username
         page = 1
         followers.removeAll()
         filteredFollowers.removeAll()
-        collectionView.setContentOffset(.zero, animated: true)
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
         getFollowers(page: page)
     }
 }
