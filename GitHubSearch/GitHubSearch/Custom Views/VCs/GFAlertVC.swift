@@ -52,7 +52,7 @@ class GFAlertVC: UIViewController {
     }
     
     func configureTitleLabel() {
-        titleLabel.text = alertTitle ?? "Something went wrong"
+        titleLabel.text = alertTitle ?? "무언가 잘못 됐는데.."
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: padding),
@@ -75,7 +75,7 @@ class GFAlertVC: UIViewController {
     }
     
     func configureMessagLabel() {
-        messageLabel.text = message ?? "Unable to complete request"
+        messageLabel.text = message ?? "요청을 처리할 수 없습니다."
         messageLabel.numberOfLines = 4
         
         NSLayoutConstraint.activate([
