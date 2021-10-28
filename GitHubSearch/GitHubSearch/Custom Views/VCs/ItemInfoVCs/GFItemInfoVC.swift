@@ -18,6 +18,7 @@ class GFItemInfoVC: UIViewController {
     let itemInfoViewOne = GFItemInfoView()
     let itemInfoViewTwo = GFItemInfoView()
     let actionButton = GFButton()
+    
     var user: User!
     
     init(user: User) {
@@ -54,9 +55,7 @@ class GFItemInfoVC: UIViewController {
         actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
     }
     
-    @objc func actionButtonTapped() {
-        
-    }
+    @objc func actionButtonTapped() { }
     
     private func layoutUI() {
         view.addSubviews(stackView, actionButton)

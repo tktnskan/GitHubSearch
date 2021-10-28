@@ -12,6 +12,7 @@ enum PersistenceActionType {
 }
 
 enum PersistenceManager {
+    
     static private let defaults = UserDefaults.standard
     
     enum Keys {

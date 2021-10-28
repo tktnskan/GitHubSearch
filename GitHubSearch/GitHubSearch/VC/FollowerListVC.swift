@@ -56,29 +56,6 @@ class FollowerListVC: GFDataLoadingVC {
         navigationItem.rightBarButtonItem = addButton
     }
     
-    @objc func addButtonTapped() {
-        isLoadingMoreFollower = true
-        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let user):
-                let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
-                PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
-                    guard let self = self else { return }
-                    guard let error = error else {
-                        self.presentGFAlertOnMainThread(title: "성공", message: "\(user.login) 님이 Favorite에 추가되었습니다.", buttonTitle: "Ok")
-                        return
-                    }
-                    self.presentGFAlertOnMainThread(title: "실패", message: error.rawValue, buttonTitle: "Ok")
-                }
-            case .failure(let error):
-                self.presentGFAlertOnMainThread(title: "오류", message: error.rawValue, buttonTitle: "Ok")
-            }
-            self.isLoadingMoreFollower = false
-        }
-    }
-    
     func configureCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createColumnFlowLayout())
         view.addSubview(collectionView)
@@ -117,19 +94,7 @@ class FollowerListVC: GFDataLoadingVC {
             self.dismissLoadingView()
             switch result {
             case .success(let followers):
-                if followers.count < 100 {
-                    self.hasMoreFollowers = false
-                }
-                self.followers.append(contentsOf: followers)
-                
-                if self.followers.isEmpty {
-                    let message = "팔로잉 중인 유저가 없네요..."
-                    DispatchQueue.main.async {
-                        self.showEmptyStateView(with: message, in: self.view)
-                    }
-                    return
-                }
-                self.updateData(on: self.followers)
+                self.updateUI(with: followers)
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Bad", message: error.rawValue, buttonTitle: "Ok")
             }
@@ -144,6 +109,22 @@ class FollowerListVC: GFDataLoadingVC {
         })
     }
     
+    func updateUI(with followers: [Follower]) {
+        if followers.count < 100 {
+            self.hasMoreFollowers = false
+        }
+        self.followers.append(contentsOf: followers)
+        
+        if self.followers.isEmpty {
+            let message = "팔로잉 중인 유저가 없네요..."
+            DispatchQueue.main.async {
+                self.showEmptyStateView(with: message, in: self.view)
+            }
+            return
+        }
+        self.updateData(on: self.followers)
+    }
+    
     func updateData(on followers: [Follower]) {
         var snapShot = NSDiffableDataSourceSnapshot<Section, Follower>()
         snapShot.appendSections([.main])
@@ -152,10 +133,38 @@ class FollowerListVC: GFDataLoadingVC {
             self.dataSource.apply(snapShot, animatingDifferences: true)
         }
     }
+    
+    @objc func addButtonTapped() {
+        isLoadingMoreFollower = true
+        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let user):
+                self.addUserToFavorites(user: user)
+            case .failure(let error):
+                self.presentGFAlertOnMainThread(title: "오류", message: error.rawValue, buttonTitle: "Ok")
+            }
+            self.isLoadingMoreFollower = false
+        }
+    }
+    
+    func addUserToFavorites(user: User) {
+        let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
+        PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
+            guard let self = self else { return }
+            guard let error = error else {
+                self.presentGFAlertOnMainThread(title: "성공", message: "\(user.login) 님이 Favorite에 추가되었습니다.", buttonTitle: "Ok")
+                return
+            }
+            self.presentGFAlertOnMainThread(title: "실패", message: error.rawValue, buttonTitle: "Ok")
+        }
+    }
 }
 
 
 extension FollowerListVC: UICollectionViewDelegate {
+    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let offSetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
@@ -181,6 +190,7 @@ extension FollowerListVC: UICollectionViewDelegate {
 }
 
 extension FollowerListVC: UISearchResultsUpdating {
+    
     func updateSearchResults(for searchController: UISearchController) {
         guard let filter = searchController.searchBar.text, !filter.isEmpty else {
             updateData(on: followers)
@@ -194,10 +204,12 @@ extension FollowerListVC: UISearchResultsUpdating {
 }
 
 extension FollowerListVC: UserInfoVCDelegate {
+    
     func didRequestFollowers(for username: String) {
         self.username = username
         title = username
         page = 1
+        
         followers.removeAll()
         filteredFollowers.removeAll()
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
