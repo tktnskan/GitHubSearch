@@ -158,13 +158,12 @@ class FollowerListVC: GFDataLoadingVC {
     
     func addUserToFavorites(user: User) {
         let favorite = Follower(login: user.login, avatarUrl: user.avatarUrl)
-        PersistenceManager.updateWith(favorite: favorite, actionType: .add) { [weak self] error in
-            guard let self = self else { return }
-            guard let error = error else {
-                self.presentGFAlert(title: "성공", message: "\(user.login) 님이 Favorite에 추가되었습니다.", buttonTitle: "Ok")
-                return
+        Task {
+            if let error = try? await PersistenceManager.updateWith(favorite: favorite, actionType: .add) {
+                self.presentGFAlert(title: "실패", message: error.rawValue, buttonTitle: "Ok")
+            } else {
+                presentGFAlert(title: "성공", message: "\(user.login) 님이 Favorite에 추가되었습니다.", buttonTitle: "Ok")
             }
-            self.presentGFAlert(title: "실패", message: error.rawValue, buttonTitle: "Ok")
         }
     }
 }

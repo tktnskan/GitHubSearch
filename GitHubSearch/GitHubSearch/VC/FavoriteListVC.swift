@@ -42,13 +42,16 @@ class FavoriteListVC: GFDataLoadingVC {
     }
     
     func getFavorites() {
-        PersistenceManager.retrieveFavorites { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let favorites):
-                self.updateUI(with: favorites)
-            case .failure(let error):
-                self.presentGFAlert(title: "오류", message: error.rawValue, buttonTitle: "Ok")
+        Task {
+            do {
+                let favorites = try await PersistenceManager.retrieveFavorites()
+                updateUI(with: favorites)
+            } catch {
+                if let gfError = error as? GFError {
+                    self.presentGFAlert(title: "오류", message: gfError.rawValue, buttonTitle: "Ok")
+                } else {
+                    presentDefaultError()
+                }
             }
         }
     }
@@ -92,14 +95,14 @@ extension FavoriteListVC: UITableViewDelegate, UITableViewDataSource {
         
         let favorite = favorites[indexPath.row]
         
-        PersistenceManager.updateWith(favorite: favorite, actionType: .remove) { [weak self] error in
-            guard let self = self else { return }
-            guard let error = error else {
-                self.favorites.remove(at: indexPath.row)
+        Task {
+            
+            if let error = try? await PersistenceManager.updateWith(favorite: favorite, actionType: .remove) {
+                self.presentGFAlert(title: "오류", message: error.rawValue, buttonTitle: "Ok")
+            } else {
+                favorites.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .left)
-                return
             }
-            self.presentGFAlert(title: "오류", message: error.rawValue, buttonTitle: "Ok")
         }
     }
 }
