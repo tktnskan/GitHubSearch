@@ -10,11 +10,20 @@ import SafariServices
 
 extension UIViewController {
     
-    func presentGFAlertOnMainThread(title: String, message: String, buttonTitle: String) {
+    func presentGFAlert(title: String, message: String, buttonTitle: String) {
+        let alertVC = GFAlertVC(title: title, message: message, buttonTitle: buttonTitle)
+        alertVC.modalPresentationStyle = .overFullScreen
+        alertVC.modalTransitionStyle = .crossDissolve
         DispatchQueue.main.async {
-            let alertVC = GFAlertVC(title: title, message: message, buttonTitle: buttonTitle)
-            alertVC.modalPresentationStyle = .overFullScreen
-            alertVC.modalTransitionStyle = .crossDissolve
+            self.present(alertVC, animated: true)
+        }
+    }
+    
+    func presentDefaultError() {
+        let alertVC = GFAlertVC(title: "에러", message: "다시 시도해주세요.", buttonTitle: "Ok")
+        alertVC.modalPresentationStyle = .overFullScreen
+        alertVC.modalTransitionStyle = .crossDissolve
+        DispatchQueue.main.async {
             self.present(alertVC, animated: true)
         }
     }

@@ -48,7 +48,7 @@ class FavoriteListVC: GFDataLoadingVC {
             case .success(let favorites):
                 self.updateUI(with: favorites)
             case .failure(let error):
-                self.presentGFAlertOnMainThread(title: "오류", message: error.rawValue, buttonTitle: "Ok")
+                self.presentGFAlert(title: "오류", message: error.rawValue, buttonTitle: "Ok")
             }
         }
     }
@@ -99,7 +99,7 @@ extension FavoriteListVC: UITableViewDelegate, UITableViewDataSource {
                 tableView.deleteRows(at: [indexPath], with: .left)
                 return
             }
-            self.presentGFAlertOnMainThread(title: "오류", message: error.rawValue, buttonTitle: "Ok")
+            self.presentGFAlert(title: "오류", message: error.rawValue, buttonTitle: "Ok")
         }
     }
 }

@@ -54,23 +54,21 @@ class UserInfoVC: GFDataLoadingVC {
     }
     
     func getUserInfo() {
-        NetworkManager.shared.getUserInfo(for: username) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let user):
-                DispatchQueue.main.async {
-                    self.configureUIElements(with: user)
+        Task {
+            do {
+                let user = try await NetworkManager.shared.getUserInfo(for: username)
+                configureUIElements(with: user)
+            } catch {
+                if let gfError = error as? GFError {
+                    presentGFAlert(title: "Bad", message: gfError.rawValue, buttonTitle: "Ok")
+                } else {
+                    presentDefaultError()
                 }
-                
-            case .failure(let error):
-                self.presentGFAlertOnMainThread(title: "음....?", message: error.rawValue, buttonTitle: "Ok")
             }
         }
     }
     
     func configureUIElements(with user: User) {
-        
         self.add(childVC: GFUserInfoHeaderVC(user: user), to: self.headerView)
         self.add(childVC: GFRepoItemVC(user: user, delegate: self), to: self.itemViewOne)
         self.add(childVC: GFFollowerItemVC(user: user, delegate: self), to: self.itemViewTwo)
@@ -125,7 +123,7 @@ extension UserInfoVC: GFRepoItemVCDelegate {
     
     func didTapGiHubProfile(for user: User) {
         guard let url = URL(string: user.htmlUrl) else {
-            presentGFAlertOnMainThread(title: "주소 오류", message: "유저 주소가 정확하지 않습니다.", buttonTitle: "Ok")
+            presentGFAlert(title: "주소 오류", message: "유저 주소가 정확하지 않습니다.", buttonTitle: "Ok")
             return
         }
         presentSafariVC(with: url)
@@ -136,7 +134,7 @@ extension UserInfoVC: GFFollowerItemVCDelegate {
     
     func didTapGetFollowers(for user: User) {
         guard user.followers != 0 else {
-            presentGFAlertOnMainThread(title: "팔로워 없음", message: "\(user.login) 유저는 팔로워가 없네요 😅", buttonTitle: "Ok")
+            presentGFAlert(title: "팔로워 없음", message: "\(user.login) 유저는 팔로워가 없네요 😅", buttonTitle: "Ok")
             return
         }
         delegate.didRequestFollowers(for: user.login)

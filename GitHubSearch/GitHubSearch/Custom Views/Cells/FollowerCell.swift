@@ -16,6 +16,12 @@ class FollowerCell: UICollectionViewCell {
     
     private let padding: CGFloat = 8
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        avatarImageView.image = nil
+        usernameLabel.text = nil
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews(avatarImageView, usernameLabel)
