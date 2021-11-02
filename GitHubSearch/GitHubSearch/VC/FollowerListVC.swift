@@ -24,6 +24,8 @@ class FollowerListVC: GFDataLoadingVC {
     var collectionView: UICollectionView!
     var dataSource: UICollectionViewDiffableDataSource<Section,Follower>!
     
+    let githubProfileButton = GFButton(color: .systemPurple, title: "Github Profile", systemImageName: "person")
+    
     init(username: String) {
         super.init(nibName: nil, bundle: nil)
         self.username = username
@@ -39,6 +41,7 @@ class FollowerListVC: GFDataLoadingVC {
         configureCollectionView()
         configureSearchController()
         configureVC()
+        configureGitHubButton()
         getFollowers(page: page)
         configureDataSource()
     }
@@ -62,6 +65,18 @@ class FollowerListVC: GFDataLoadingVC {
         collectionView.delegate = self
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseID)
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 60, right: 0)
+    }
+    
+    func configureGitHubButton() {
+        githubProfileButton.addTarget(self, action: #selector(didTouchedgithubProfileButton), for: .touchUpInside)
+        view.addSubview(githubProfileButton)
+        NSLayoutConstraint.activate([
+            githubProfileButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            githubProfileButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -getTabBarHeight() + 10),
+            githubProfileButton.heightAnchor.constraint(equalToConstant: 44),
+            githubProfileButton.widthAnchor.constraint(equalToConstant: 200),
+        ])
     }
     
     func createColumnFlowLayout(columnNumber: CGFloat = 3) -> UICollectionViewFlowLayout {
@@ -85,6 +100,21 @@ class FollowerListVC: GFDataLoadingVC {
         searchController.obscuresBackgroundDuringPresentation = false
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.searchController = searchController
+    }
+    
+    func getUserInfo(completed: @escaping (User) -> Void) {
+        Task {
+            do {
+                let user = try await NetworkManager.shared.getUserInfo(for: username)
+                completed(user)
+            } catch {
+                if let gfError = error as? GFError {
+                    presentGFAlert(title: "Bad", message: gfError.rawValue, buttonTitle: "Ok")
+                } else {
+                    presentDefaultError()
+                }
+            }
+        }
     }
     
     func getFollowers(page: Int) {
@@ -142,17 +172,20 @@ class FollowerListVC: GFDataLoadingVC {
     }
     
     @objc func addButtonTapped() {
-        Task {
-            do {
-                let user = try await NetworkManager.shared.getUserInfo(for: username)
-                addUserToFavorites(user: user)
-            } catch {
-                if let gfError = error as? GFError {
-                    presentGFAlert(title: "Bad", message: gfError.rawValue, buttonTitle: "Ok")
-                } else {
-                    presentDefaultError()
-                }
+        getUserInfo { [weak self] user in
+            guard let self = self else { return }
+            self.addUserToFavorites(user: user)
+        }
+    }
+    
+    @objc func didTouchedgithubProfileButton() {
+        getUserInfo { [weak self] user in
+            guard let self = self else { return }
+            guard let url = URL(string: user.htmlUrl) else {
+                self.presentGFAlert(title: "주소 오류", message: "유저 주소가 정확하지 않습니다.", buttonTitle: "Ok")
+                return
             }
+            self.presentSafariVC(with: url)
         }
     }
     

@@ -10,6 +10,12 @@ import SafariServices
 
 extension UIViewController {
     
+    func getTabBarHeight() -> CGFloat {
+        guard let navi = navigationController else { return 0.0 }
+        guard let tabbarCon = navi.tabBarController else { return 0.0 }
+        return tabbarCon.tabBar.frame.height
+    }
+    
     func presentGFAlert(title: String, message: String, buttonTitle: String) {
         let alertVC = GFAlertVC(title: title, message: message, buttonTitle: buttonTitle)
         alertVC.modalPresentationStyle = .overFullScreen
