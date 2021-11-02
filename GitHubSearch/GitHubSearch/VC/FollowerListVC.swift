@@ -147,9 +147,8 @@ class FollowerListVC: GFDataLoadingVC {
     }
     
     func updateUI(with followers: [Follower]) {
-        if followers.count < 100 {
-            self.hasMoreFollowers = false
-        }
+        self.hasMoreFollowers = !(followers.count < 100)
+        
         self.followers.append(contentsOf: followers)
         
         if self.followers.isEmpty {
