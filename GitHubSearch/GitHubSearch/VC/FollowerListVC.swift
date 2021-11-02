@@ -73,7 +73,7 @@ class FollowerListVC: GFDataLoadingVC {
         view.addSubview(githubProfileButton)
         NSLayoutConstraint.activate([
             githubProfileButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            githubProfileButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -getTabBarHeight() + 10),
+            githubProfileButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(getTabBarHeight() + 10)),
             githubProfileButton.heightAnchor.constraint(equalToConstant: 44),
             githubProfileButton.widthAnchor.constraint(equalToConstant: 200),
         ])
