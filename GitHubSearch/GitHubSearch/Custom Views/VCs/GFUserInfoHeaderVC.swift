@@ -2,7 +2,7 @@
 //  GFUserInfoHeaderVC.swift
 //  GitHubSearch
 //
-//  Created by GJC03280 on 2021/10/20.
+//  Created by Jinyung Yoon on 2021/10/20.
 //
 
 import UIKit

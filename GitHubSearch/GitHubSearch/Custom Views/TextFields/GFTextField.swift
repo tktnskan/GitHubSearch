@@ -2,7 +2,7 @@
 //  GFTextField.swift
 //  GitHubSearch
 //
-//  Created by GJC03280 on 2021/10/13.
+//  Created by Jinyung Yoon on 2021/10/13.
 //
 
 import UIKit

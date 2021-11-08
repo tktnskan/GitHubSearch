@@ -2,7 +2,7 @@
 //  FollowerCell.swift
 //  GitHubSearch
 //
-//  Created by GJC03280 on 2021/10/18.
+//  Created by Jinyung Yoon on 2021/10/18.
 //
 
 import UIKit

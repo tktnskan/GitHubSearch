@@ -2,7 +2,7 @@
 //  GFRepoItemVC.swift
 //  GitHubSearch
 //
-//  Created by GJC03280 on 2021/10/21.
+//  Created by Jinyung Yoon on 2021/10/21.
 //
 
 import UIKit

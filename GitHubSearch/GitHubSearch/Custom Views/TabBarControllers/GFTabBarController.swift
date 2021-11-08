@@ -2,7 +2,7 @@
 //  GFTabBarController.swift
 //  GitHubSearch
 //
-//  Created by GJC03280 on 2021/10/25.
+//  Created by Jinyung Yoon on 2021/10/25.
 //
 
 import UIKit

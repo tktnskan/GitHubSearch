@@ -2,7 +2,7 @@
 //  NetworkManager.swift
 //  GitHubSearch
 //
-//  Created by GJC03280 on 2021/10/15.
+//  Created by Jinyung Yoon on 2021/10/15.
 //
 
 import UIKit
